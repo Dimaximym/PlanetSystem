@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "QRegExp"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -15,4 +16,14 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::on_buttonAccept_clicked()
+{
+    auto textEdit = ui->textEdit;
+    QString request = textEdit->toPlainText();
+    QRegExp regular("\\badd\\b x-?(\\d\\d?\\d?) y-?(\\d\\d?\\d?) m(\\d\\d\\d?\\d?)");
+    if (regular.indexIn(request) != -1) {
+        qDebug() << "X = " << regular.cap(1);
+    }
 }
