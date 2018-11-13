@@ -28,12 +28,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     system.cpp \
-    planet.cpp
+    planet.cpp \
+    parser.cpp
 
 HEADERS += \
         mainwindow.h \
     system.h \
-    planet.h
+    planet.h \
+    parser.h
 
 FORMS += \
         mainwindow.ui

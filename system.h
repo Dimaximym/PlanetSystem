@@ -14,7 +14,7 @@ public:
     QGraphicsScene *scene;
     QTimer *timer;
 
-    QVector<Planet> system;
+    QVector<Planet> planetSystem;
 public:
     explicit System(QObject *parent = nullptr);
 

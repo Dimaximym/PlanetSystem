@@ -6,30 +6,30 @@ System::System(QObject *parent) : QObject(parent) {
     connect(timer, SIGNAL(timeout()),
             this, SLOT(slotTimerActivated()));
 
-    system.push_back(Planet(0, 0, 2000, 20, 0));
-    scene->addItem(system.back().planet);
+    planetSystem.push_back(Planet(0, 0, 2000, 20, 0));
+    scene->addItem(planetSystem.back().planet);
 
-    system.push_back(Planet(-100, 0, 10, 10));
-    scene->addItem(system.back().planet);
-
-
+    planetSystem.push_back(Planet(-100, 0, 10, 10));
+    scene->addItem(planetSystem.back().planet);
 
 
-    system.push_back(Planet(-150, 0, 15, 10));
-    scene->addItem(system.back().planet);
 
-    system.push_back(Planet(-200, 0, 100, 10));
-    scene->addItem(system.back().planet);
 
-    system.push_back(Planet(-230, 0, 5, 2));
-    scene->addItem(system.back().planet);
+    planetSystem.push_back(Planet(-150, 0, 15, 10));
+    scene->addItem(planetSystem.back().planet);
+
+    planetSystem.push_back(Planet(-200, 0, 100, 10));
+    scene->addItem(planetSystem.back().planet);
+
+    planetSystem.push_back(Planet(-230, 0, 5, 2));
+    scene->addItem(planetSystem.back().planet);
 
     timer->start(1);
 }
 
 void System::slotTimerActivated() {
-    for (int i = 0; i < system.size(); ++i) {
-        QGraphicsEllipseItem *p0 = system[i].planet;
+    for (int i = 0; i < planetSystem.size(); ++i) {
+        QGraphicsEllipseItem *p0 = planetSystem[i].planet;
 
 //        auto collisionList = scene->collidingItems(p0);
 //        bool collision = !collisionList.isEmpty();
@@ -51,19 +51,19 @@ void System::slotTimerActivated() {
 //                continue;
 //            }
 //        }
-        for (int j = 0; j < system.size(); ++j) {
+        for (int j = 0; j < planetSystem.size(); ++j) {
             if (j == i) continue;
-            QGraphicsEllipseItem *p = system[j].planet;
+            QGraphicsEllipseItem *p = planetSystem[j].planet;
             double d = sqrt((p0->x() - p->x()) * (p0->x() - p->x()) +
                            (p0->y() - p->y()) * (p0->y() - p->y()));
             if (d > 3) {
-                system[i].vx += 0.0007 * system[j].mass / d / d
+                planetSystem[i].vx += 0.0007 * planetSystem[j].mass / d / d
                         * (p->x() - p0->x()) / d;
-                system[i].vy += 0.0007 * system[j].mass / d / d
+                planetSystem[i].vy += 0.0007 * planetSystem[j].mass / d / d
                         * (p->y() - p0->y()) / d;
             }
         }
-        p0->setPos(p0->x() + system[i].vx, p0->y() + system[i].vy);
+        p0->setPos(p0->x() + planetSystem[i].vx, p0->y() + planetSystem[i].vy);
 
 //        qDebug() << "x = " << p0->x() << " y = " <<  p0->y();
     }
