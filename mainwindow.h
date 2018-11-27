@@ -21,8 +21,11 @@ public:
 
 private slots:
     void on_buttonAccept_clicked();
+
 public slots:
     void createBody(int x, int y, int mass, int rad);
+    void FillLog(QString err, QString src, QString rx);
+    void clear();
 
 private:
     Ui::MainWindow *ui;
